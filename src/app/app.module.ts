@@ -1,7 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListarEstudiantesComponent } from './componentes/estudiantes/listar-estudiantes/listar-estudiantes.component';
@@ -18,7 +17,6 @@ import { Consulta3Component } from './componentes/consultas/consulta3/consulta3.
 import { Consulta4Component } from './componentes/consultas/consulta4/consulta4.component';
 import { Consulta5Component } from './componentes/consultas/consulta5/consulta5.component';
 import { Consulta6Component } from './componentes/consultas/consulta6/consulta6.component';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
