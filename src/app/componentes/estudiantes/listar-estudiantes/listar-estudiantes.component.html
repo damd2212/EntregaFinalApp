@@ -4,6 +4,10 @@
     <h5 class="card-title">Listado de estudiantes</h5>
     <div class="my-2 text-left">
       <button class="btn btn-rounded btn-success" type="button" [routerLink]="['/estudiantes/form','-1']">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+          <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+          <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+        </svg>
         Crear Estudiante
       </button>
     </div>
@@ -33,9 +37,23 @@
               <td>{{estudiante.correoElectronico}}</td>
               <td>{{estudiante.fechaIngreso | date: 'mediumDate'}}</td>
               <td>
-                <button type="button" class="btn btn-warning" [routerLink]="['/estudiantes/form',estudiante.idPersona]">Editar</button>
-                <button style="margin-left: 10px;" type="button" (click)="eliminarEstudiante(estudiante.idPersona)" class="btn btn-danger">Eliminar</button>
+                <button type="button" class="btn btn-warning" [routerLink]="['/estudiantes/form',estudiante.idPersona]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                  </svg>
+                  Editar
+                </button>
+                <button style="margin-left: 10px;" type="button" (click)="eliminarEstudiante(estudiante.idPersona)" class="btn btn-danger">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                  </svg>
+                  Eliminar
+                </button>
                 <button type="button" style="margin-left: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#infoEstudiante" (click)="cargarEstudainte(estudiante)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                  </svg>
                   Ver informacion
                 </button>
               </td>
@@ -57,7 +75,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <h5 class="titulo">Informacion general</h5>
+        <h5 class="titulo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z"/>
+          </svg>
+          Informacion general
+        </h5>
         <span class="subtitulo">Numero de identificiacion: </span>{{objEstudiante.noIdentificacion}}
         <br>
         <span class="subtitulo">Tipo de identificiacion: </span>{{objEstudiante.tipoIdentificacion}}
@@ -70,14 +93,25 @@
         <br>
         <span class="subtitulo">Fecha de ingreso: </span>{{objEstudiante.fechaIngreso | date: 'mediumDate'}}
         <hr>
-        <h5 class="titulo">Informacion de la direccion</h5>
+        <h5 class="titulo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+          </svg>
+          Informacion de la direccion
+        </h5>
         <span class="subtitulo">Direccion de residencia: </span>{{objDireccion.direccionResidencia}}
         <br>
         <span class="subtitulo">Ciudad: </span>{{objDireccion.ciudad}}
         <br>
         <span class="subtitulo">Pais: </span>{{objDireccion.pais}}
         <hr>
-        <h5 class="titulo">Telefonos</h5>
+        <h5 class="titulo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+          </svg>
+          Telefonos
+        </h5>
         <div *ngFor="let telefono of objTelefonos; let indice=index">
           <span class="subtitulo">Telefono #{{indice+1}} </span>
           <br>
