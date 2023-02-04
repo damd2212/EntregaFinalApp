@@ -19,6 +19,7 @@
               <th>Nombres</th>
               <th>Apellidos</th>
               <th>Correo Universitario</th>
+              <th>Fecha Ingreso</th>
               <th>Acciones</th>
           </tr>
 
@@ -30,6 +31,7 @@
               <td>{{estudiante.nombres}}</td>
               <td>{{estudiante.apellidos}}</td>
               <td>{{estudiante.correoElectronico}}</td>
+              <td>{{estudiante.fechaIngreso | date: 'mediumDate'}}</td>
               <td>
                 <button type="button" class="btn btn-warning" [routerLink]="['/estudiantes/form',estudiante.idPersona]">Editar</button>
                 <button style="margin-left: 10px;" type="button" (click)="eliminarEstudiante(estudiante.idPersona)" class="btn btn-danger">Eliminar</button>
