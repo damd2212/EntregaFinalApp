@@ -35,10 +35,62 @@
               <td>
                 <button type="button" class="btn btn-warning" [routerLink]="['/estudiantes/form',estudiante.idPersona]">Editar</button>
                 <button style="margin-left: 10px;" type="button" (click)="eliminarEstudiante(estudiante.idPersona)" class="btn btn-danger">Eliminar</button>
+                <button type="button" style="margin-left: 10px;" class="btn btn-primary" data-toggle="modal" data-target="#infoEstudiante" (click)="cargarEstudainte(estudiante)">
+                  Ver informacion
+                </button>
               </td>
           </tr>
       </tbody>
 
     </table>
+  </div>
+</div>
+
+
+<div class="modal fade" id="infoEstudiante" tabindex="-1" role="dialog" aria-labelledby="infoEstudiante" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Informacion del Estudiante</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5 class="titulo">Informacion general</h5>
+        <span class="subtitulo">Numero de identificiacion: </span>{{objEstudiante.noIdentificacion}}
+        <br>
+        <span class="subtitulo">Tipo de identificiacion: </span>{{objEstudiante.tipoIdentificacion}}
+        <br>
+        <span class="subtitulo">Nombres: </span>{{objEstudiante.nombres}}
+        <br>
+        <span class="subtitulo">Apellidos: </span>{{objEstudiante.apellidos}}
+        <br>
+        <span class="subtitulo">Correo Universitario: </span>{{objEstudiante.correoElectronico}}
+        <br>
+        <span class="subtitulo">Fecha de ingreso: </span>{{objEstudiante.fechaIngreso | date: 'mediumDate'}}
+        <hr>
+        <h5 class="titulo">Informacion de la direccion</h5>
+        <span class="subtitulo">Direccion de residencia: </span>{{objDireccion.direccionResidencia}}
+        <br>
+        <span class="subtitulo">Ciudad: </span>{{objDireccion.ciudad}}
+        <br>
+        <span class="subtitulo">Pais: </span>{{objDireccion.pais}}
+        <hr>
+        <h5 class="titulo">Telefonos</h5>
+        <div *ngFor="let telefono of objTelefonos; let indice=index">
+          <span class="subtitulo">Telefono #{{indice+1}} </span>
+          <br>
+          <span class="subtitulo">Telefono: </span>{{telefono.numero}}
+          <br>
+          <span class="subtitulo">Tipo: </span>{{telefono.tipo}}
+          <br>
+          <br>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
   </div>
 </div>
