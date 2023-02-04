@@ -15,7 +15,15 @@ export class EstudiantesService {
   constructor(private http:HttpClient) { }
 
   getEstudiantes():Observable<Estudiante[]>{
-    return this.http.get<Estudiante[]>(this.urlEndPoint);
+    return this.http.get<Estudiante[]>(this.urlEndPoint+'/todos');
+  }
+
+  getEstudianteById(id:number):Observable<Estudiante>{
+    return this.http.get<Estudiante>(this.urlEndPoint+'/'+id)
+  }
+
+  deleteEstudiante(id:number):Observable<Boolean>{
+    return this.http.delete<Boolean>(this.urlEndPoint+'/'+id)
   }
 
 }

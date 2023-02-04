@@ -3,7 +3,7 @@ import { Persona } from "./persona";
 import { Telefono } from "./telefono";
 
 export class Estudiante extends Persona {
-  codigo!: number;
+  fechaIngreso!:string;
 	correoElectronico!: string;
   objDireccion!:Direccion;
   listaTelefonos!:Telefono[];

@@ -1,1 +1,42 @@
-<p>listar-estudiantes works!</p>
+<div class="card">
+  <div class="card-header"><h4>Estudiantes</h4></div>
+  <div class="card-body">
+    <h5 class="card-title">Listado de estudiantes</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-success" type="button" [routerLink]="['/estudiantes/form','-1']">
+        Crear Estudiante
+      </button>
+    </div>
+    <div *ngIf="estudiantes?.length==0" class="alert alert-info" >
+        No existen estudiantes registrados
+    </div>
+
+    <table class="table table-bordered table-striped" *ngIf="estudiantes.length>0">
+      <thead>
+          <tr>
+              <th>Identificacion</th>
+              <th>Tipo Identificacion</th>
+              <th>Nombres</th>
+              <th>Apellidos</th>
+              <th>Correo Universitario</th>
+              <th>Acciones</th>
+          </tr>
+
+      </thead>
+      <tbody>
+          <tr *ngFor="let estudiante of estudiantes">
+              <td>{{estudiante.noIdentificacion}}</td>
+              <td>{{estudiante.tipoIdentificacion}}</td>
+              <td>{{estudiante.nombres}}</td>
+              <td>{{estudiante.apellidos}}</td>
+              <td>{{estudiante.correoElectronico}}</td>
+              <td>
+                <button type="button" class="btn btn-warning" [routerLink]="['/estudiantes/form',estudiante.idPersona]">Editar</button>
+                <button style="margin-left: 10px;" type="button" (click)="eliminarEstudiante(estudiante.idPersona)" class="btn btn-danger">Eliminar</button>
+              </td>
+          </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
