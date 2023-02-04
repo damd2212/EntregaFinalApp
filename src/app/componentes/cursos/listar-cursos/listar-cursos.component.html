@@ -1,9 +1,15 @@
-<div *ngIf="cursos?.length==0" class="alert alert-info layout" >
-  No hay registros en la base de datos
-</div>
-<h4 class="layoutT">Lista de cursos</h4>
-<div class="table-responsive" *ngIf="cursos.length>0">
-    <table class="table table-hover">
+<div class="card">
+  <div class="card-header">
+    <h4>Cursos</h4>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Listado de cursos</h5>
+    <br>
+    <div *ngIf="cursos?.length == 0" class="alert alert-info ">
+      No hay registros en la base de datos
+    </div>
+    <div class="table-responsive" *ngIf="cursos.length > 0">
+      <table class="table table-hover">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Id del curso</th>
@@ -16,57 +22,123 @@
         </thead>
         <tbody>
           <tr *ngFor="let curso of cursos">
-            <th>{{curso.idCurso}}</th>
-            <td>{{curso.nombre}}</td>
-            <td>{{curso.periodo}}</td>
-            <td>{{curso.objAsignatura!.idAsignatura}}</td>
-            <td>{{curso.objAsignatura!.nombre}}</td>
-            <td><button type="button" (click)="seleccionarCurso(curso.idCurso)" data-toggle="modal" data-target="#exampleModal" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-            </svg>  Ver</button></td>
+            <th>{{ curso.idCurso }}</th>
+            <td>{{ curso.nombre }}</td>
+            <td>{{ curso.periodo }}</td>
+            <td>{{ curso.objAsignatura!.idAsignatura }}</td>
+            <td>{{ curso.objAsignatura!.nombre }}</td>
+            <td>
+              <button
+                type="button"
+                (click)="seleccionarCurso(curso.idCurso)"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                class="btn btn-info"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-eye-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                  <path
+                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                  />
+                </svg>
+                Ver
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
-</div>
-
-<div *ngIf="cursoSeleccionado!=null">
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Información del curso</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <h5>Curso {{cursoSeleccionado.nombre}}</h5>
-       <br>
-       <p><strong>Identificador del curso: </strong> {{cursoSeleccionado.idCurso}}</p>
-       <p><strong>Periodo academico: </strong> {{cursoSeleccionado.periodo}}</p>
-       <p><strong>Asignatura a la que pertenece: </strong> {{cursoSeleccionado.objAsignatura!.nombre}}</p>      
-       <ul class="list-group">
-        <li class="list-group-item list-group-item-primary" aria-current="true"> <h5>Listado de profesores</h5></li>
-        <div *ngFor="let docente of cursoSeleccionado.objAsignatura!.listaDocentes">
-          <div  class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{docente.nombres}} {{docente.apellidos}}</h5>
-              <small class="text-muted">{{docente.tipoDocente}}</small>
-            </div>
-            <p class="mb-1"><strong>Número de identificación: </strong>{{docente.noIdentificacion}}</p>
-            <p class="mb-1"><strong>Tipo de identificación: </strong>{{docente.tipoIdentificacion}}</p>
-            <p class="mb-1"><strong>Universidad: </strong>{{docente.universidad}}</p>
-            <p class="mb-1"><strong>Salario: </strong>{{docente.salario}}</p>
-          </div>
-        </div>
-      </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-dismiss="modal">Aceptar</button>
-      </div>
     </div>
   </div>
 </div>
+
+<div *ngIf="cursoSeleccionado != null">
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Información del curso
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>Curso {{ cursoSeleccionado.nombre }}</h5>
+          <br />
+          <p>
+            <strong>Identificador del curso: </strong>
+            {{ cursoSeleccionado.idCurso }}
+          </p>
+          <p>
+            <strong>Periodo academico: </strong> {{ cursoSeleccionado.periodo }}
+          </p>
+          <p>
+            <strong>Asignatura a la que pertenece: </strong>
+            {{ cursoSeleccionado.objAsignatura!.nombre }}
+          </p>
+          <ul class="list-group">
+            <li
+              class="list-group-item list-group-item-primary"
+              aria-current="true"
+            >
+              <h5>Listado de profesores</h5>
+            </li>
+            <div
+              *ngFor="
+                let docente of cursoSeleccionado.objAsignatura!.listaDocentes
+              "
+            >
+              <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">
+                    {{ docente.nombres }} {{ docente.apellidos }}
+                  </h5>
+                  <small class="text-muted">{{ docente.tipoDocente }}</small>
+                </div>
+                <p class="mb-1">
+                  <strong>Número de identificación: </strong
+                  >{{ docente.noIdentificacion }}
+                </p>
+                <p class="mb-1">
+                  <strong>Tipo de identificación: </strong
+                  >{{ docente.tipoIdentificacion }}
+                </p>
+                <p class="mb-1">
+                  <strong>Universidad: </strong>{{ docente.universidad }}
+                </p>
+                <p class="mb-1">
+                  <strong>Salario: </strong>{{ docente.salario }}
+                </p>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">
+            Aceptar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
