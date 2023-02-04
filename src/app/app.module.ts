@@ -17,6 +17,7 @@ import { Consulta3Component } from './componentes/consultas/consulta3/consulta3.
 import { Consulta4Component } from './componentes/consultas/consulta4/consulta4.component';
 import { Consulta5Component } from './componentes/consultas/consulta5/consulta5.component';
 import { Consulta6Component } from './componentes/consultas/consulta6/consulta6.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { Consulta6Component } from './componentes/consultas/consulta6/consulta6.
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
