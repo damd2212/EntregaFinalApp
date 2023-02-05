@@ -1,4 +1,9 @@
 <div class="card">
+  <div class="alert alert-danger" *ngIf="errores.length > 0">
+    <div *ngFor="let err of errores">
+      <span>{{ err }}</span>
+    </div>
+  </div>
   <div class="card-header"><h4>Estudiantes</h4></div>
   <div class="card-body">
     <h5 class="card-title">Listado de estudiantes</h5>
