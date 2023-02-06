@@ -1,1 +1,110 @@
-<p>consulta1 works!</p>
+<div class="card">
+  <div class="card-header">
+    <h4>Consulta 1</h4>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      Buscar un conjunto de estudiantes que coincidan con un patrón de búsqueda
+      ignorando las mayúsculas y minúsculas. El patrón puede corresponder
+      nombres, apellidos o correo electrónico.
+    </h5>
+    <div>
+      <div class="row">
+        <div class="col-5">
+          <h5>Diligenciar los campos</h5>
+          <form style="margin-bottom: 25px">
+            <div class="form-group">
+              <label for="nombres">Nombres</label>
+              <input type="text"  [(ngModel)]="nombres" class="form-control" name="nombres" id="nombres"/>
+              <small id="emailHelp" class="form-text text-muted"
+                >Para realizar la busqueda puede colocar los nombres
+                parcialmente si así lo desea</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" [(ngModel)]="apellidos" class="form-control" name="apellidos" id="apellidos" />
+              <small id="emailHelp" class="form-text text-muted"
+                >Para realizar la busqueda puede colocar los apellidos
+                parcialmente si así lo desea</small
+              >
+            </div>
+            <div class="form-group">
+              <label for="correo">Correo electrónico</label>
+              <input
+                [(ngModel)]="correo" 
+                type="text"
+                class="form-control"
+                name="correo"
+                id="correo"
+                aria-describedby="emailHelp"
+              />
+              <small id="emailHelp" class="form-text text-muted"
+                >Para realizar la busqueda puede colocar el correo parcialmente
+                si así lo desea</small
+              >
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="buscar()">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-search"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                />
+              </svg>
+              Buscar
+            </button>
+          </form>
+        </div>
+        <div class="col-7">
+          <div *ngIf="estudiantesEncontrados != null">
+            <h5>Resultados</h5>
+            <div *ngIf="estudiantesEncontrados?.length == 0" class="alert alert-info ">
+              No se encontraron resultados con los datos de busqueda ingresados
+            </div>
+            <table class="table table-striped table-bordered" *ngIf="estudiantesEncontrados.length>0">
+              <thead>
+                <tr>
+                  <th scope="col">Número de identificacíon</th>
+                  <th scope="col">Tipo de identificacíon</th>
+                  <th scope="col">Nombres</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Dirección</th>
+                  <th scope="col">Telefonos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let estudiante of estudiantesEncontrados">
+                  <th>{{estudiante.noIdentificacion}}</th>
+                  <td>{{estudiante.tipoIdentificacion}}</td>
+                  <td>{{estudiante.nombres}}</td>
+                  <td>{{estudiante.apellidos}}</td>
+                  <td>{{estudiante.correoElectronico}}</td>
+                  <td>{{estudiante.objDireccion.direccionResidencia}} ({{estudiante.objDireccion.ciudad}})</td>
+                  <td>
+                    <div class="btn-group dropleft">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                        Telefonos
+                      </button>
+                      <div class="dropdown-menu">
+                        <div *ngFor="let telefono of estudiante.listaTelefonos">
+                          <a class="dropdown-item">{{telefono.numero}}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
