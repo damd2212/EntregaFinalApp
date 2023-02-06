@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Estudiante } from '../modelos/estudiante';
 
 
@@ -24,6 +24,22 @@ export class EstudiantesService {
 
   deleteEstudiante(id:number):Observable<Boolean>{
     return this.http.delete<Boolean>(this.urlEndPoint+'/'+id)
+  }
+
+  buscarPorNombresApellidosEmail(nombres:String,apellidos:String,correo:String):Observable<Estudiante[]>{
+    try {
+      return this.http.get<Estudiante[]>(this.urlEndPoint+"/nombres_apellidos_email?nombres="+nombres+"&apellidos="+apellidos+"&correoElectronico="+correo)
+    } catch (error) {
+      return throwError("Error al consultar estudiantes por nombres, apellidos y correo " + error)
+    }
+  }
+
+  buscarByIdsEstudiantes(listaIdsEstudiantes:number[]):Observable<Estudiante[]>{    
+    try {
+      return this.http.post<Estudiante[]>(this.urlEndPoint+"/buscar",listaIdsEstudiantes)
+    } catch (error) {
+      return throwError("Error al consultar estudiantes por lista de identificadores " + error)
+    }
   }
 
 }
