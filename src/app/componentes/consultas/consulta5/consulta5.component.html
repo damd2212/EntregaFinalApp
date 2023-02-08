@@ -1,1 +1,101 @@
-<p>consulta5 works!</p>
+<div>
+  <div class="card bg-light  text-black" style="width: 60%; margin: 0 auto; text-align: center;">
+    <div class="card-header"><h4>{{ titulo }}</h4></div>
+    <div class="card-body">
+      <form #estudianteForm="ngForm">
+
+        <div class="form-group row">
+          <label for="tipo" class="col-form-label col-sm-3">Tipo de identificacion<samp class="reque">*</samp></label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" [(ngModel)]="tipoIdABuscar" name="tipo" required #tipo="ngModel" placeholder="Ingrese el tipo de id"/>
+            <div class="alert alert-danger" *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)">
+              <div *ngIf="tipo.errors!['required']">
+                Debe ingresar un tipo de id para la busqueda
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="numId" class="col-form-label col-sm-3">Numero de identificacion<samp class="reque">*</samp></label>
+          <div class="col-sm-7">
+            <input type="number" class="form-control" [(ngModel)]="numIdABuscar" name="numId" required #numId="ngModel" placeholder="Ingrese el numero de id"/>
+            <div class="alert alert-danger" *ngIf="numId.invalid && (numId.dirty || numId.touched)">
+              <div *ngIf="numId.errors!['required']">
+                Debe ingresar el numero id para la busqueda
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-2">
+            <button class="btn btn-primary" style="background-color: #3155c2;" role="button" (click)='buscarEstudiante()' [disabled]="!estudianteForm.form.valid">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+              Buscar
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <hr>
+
+      <div *ngIf="objEstudiante==null" class="alert alert-info" >
+        No hay resultados para la busqueda
+      </div>
+
+
+      <div *ngIf="objEstudiante!=null">
+        <h5 class="titulo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z"/>
+          </svg>
+          Informacion general
+        </h5>
+        <span class="subtitulo">Numero de identificiacion: </span>{{objEstudiante.noIdentificacion}}
+        <br>
+        <span class="subtitulo">Tipo de identificiacion: </span>{{objEstudiante.tipoIdentificacion}}
+        <br>
+        <span class="subtitulo">Nombres: </span>{{objEstudiante.nombres}}
+        <br>
+        <span class="subtitulo">Apellidos: </span>{{objEstudiante.apellidos}}
+        <br>
+        <span class="subtitulo">Correo Universitario: </span>{{objEstudiante.correoElectronico}}
+        <br>
+        <span class="subtitulo">Fecha de ingreso: </span>{{objEstudiante.fechaIngreso | date: 'mediumDate'}}
+         <hr>
+        <h5 class="titulo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+          </svg>
+          Informacion de la direccion
+        </h5>
+        <span class="subtitulo">Direccion de residencia: </span>{{objEstudiante.objDireccion.direccionResidencia}}
+        <br>
+        <span class="subtitulo">Ciudad: </span>{{objEstudiante.objDireccion.ciudad}}
+        <br>
+        <span class="subtitulo">Pais: </span>{{objEstudiante.objDireccion.pais}}
+        <hr>
+        <h5 class="titulo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+          </svg>
+          Telefonos
+        </h5>
+        <div *ngFor="let telefono of objEstudiante.listaTelefonos; let indice=index">
+          <span class="subtitulo">Telefono #{{indice+1}} </span>
+          <br>
+          <span class="subtitulo">Telefono: </span>{{telefono.numero}}
+          <br>
+          <span class="subtitulo">Tipo: </span>{{telefono.tipo}}
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
