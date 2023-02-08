@@ -30,8 +30,8 @@ export class CursosService {
     }
   }
 
-  createCurso(curso:Curso) : Observable<Curso> {
-    return this.http.post<Curso>(this.urlEndPoint, curso, {headers: this.httpHeaders}).pipe(
+  createCurso(curso:Curso, idAsignatura: string) : Observable<Curso> {
+    return this.http.post<Curso>(this.urlEndPoint + "/?asignatura=" + idAsignatura, curso, {headers: this.httpHeaders}).pipe(
       catchError(
         e => {
           if (e.status == 400) {
