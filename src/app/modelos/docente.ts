@@ -1,9 +1,6 @@
-export class Docente {
-    idPersona!: number
-    noIdentificacion!:String
-    tipoIdentificacion!: String
-    nombres!: String
-    apellidos!: String
+import { Persona } from "./persona"
+
+export class Docente extends Persona {
     universidad!: String
     tipoDocente!: String
     salario!: number

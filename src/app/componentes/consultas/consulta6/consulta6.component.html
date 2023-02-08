@@ -1,1 +1,77 @@
-<p>consulta6 works!</p>
+<div>
+    <div class="card bg-light  text-black" style="width: 60%; margin: 0 auto; text-align: center;">
+      <div class="card-header"><h4>{{ titulo }}</h4></div>
+      <div class="card-body">
+        <form #DocenteForm="ngForm">
+  
+          <div class="form-group row">
+            <label for="tipo" class="col-form-label col-sm-3">Tipo de identificación<samp class="reque">*</samp></label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" [(ngModel)]="tipoIdABuscar" name="tipo" required #tipo="ngModel" placeholder="Ingrese el tipo de id"/>
+              <div class="alert alert-danger" *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)">
+                <div *ngIf="tipo.errors!['required']">
+                  Debe ingresar un tipo de id para la búsqueda
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <label for="numId" class="col-form-label col-sm-3">Número de identificación<samp class="reque">*</samp></label>
+            <div class="col-sm-7">
+              <input type="number" class="form-control" [(ngModel)]="numIdABuscar" name="numId" required #numId="ngModel" placeholder="Ingrese el número de id"/>
+              <div class="alert alert-danger" *ngIf="numId.invalid && (numId.dirty || numId.touched)">
+                <div *ngIf="numId.errors!['required']">
+                  Debe ingresar el número id para la búsqueda
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group row">
+            <div class="col-sm-2">
+              <button class="btn btn-primary" style="background-color: #3155c2;" role="button" (click)='buscarDocente()' [disabled]="!DocenteForm.form.valid">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                Buscar Docente
+              </button>
+            </div>
+          </div>
+  
+        </form>
+  
+        <hr>
+  
+        <div *ngIf="objDocente==null" class="alert alert-info" >
+          No hay resultados para la búsqueda
+        </div>
+  
+  
+        <div *ngIf="objDocente!=null">
+          <h5 class="titulo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+              <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z"/>
+            </svg>
+            Información general
+          </h5>
+
+          <span class="subtitulo">Numero de identificación: </span>{{objDocente.noIdentificacion}}
+          <br>
+          <span class="subtitulo">Tipo de identificación: </span>{{objDocente.tipoIdentificacion}}
+          <br>
+          <span class="subtitulo">Nombres: </span>{{objDocente.nombres}}
+          <br>
+          <span class="subtitulo">Apellidos: </span>{{objDocente.apellidos}}
+          <br>
+          <span class="subtitulo">Universidad a la que pertenece: </span>{{objDocente.universidad}}
+          <br>
+          <span class="subtitulo">Tipo de docente: </span>{{objDocente.tipoDocente}}
+          <br>
+          <span class="subtitulo">Salario: </span>{{objDocente.salario}}
+           <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+  
