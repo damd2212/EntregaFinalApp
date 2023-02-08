@@ -26,6 +26,11 @@ export class EstudiantesService {
     return this.http.delete<Boolean>(this.urlEndPoint+'/'+id)
   }
 
+  getEstudiantePorTipoNumeroId(tipoId:string,numeroId:string):Observable<Estudiante>{
+    return this.http.get<Estudiante>(this.urlEndPoint+'/exist?tipoIdentificacion='+tipoId+'&noIdentificacion='+numeroId)
+
+  }
+
   buscarPorNombresApellidosEmail(nombres:String,apellidos:String,correo:String):Observable<Estudiante[]>{
     try {
       return this.http.get<Estudiante[]>(this.urlEndPoint+"/nombres_apellidos_email?nombres="+nombres+"&apellidos="+apellidos+"&correoElectronico="+correo)
@@ -34,12 +39,14 @@ export class EstudiantesService {
     }
   }
 
-  buscarByIdsEstudiantes(listaIdsEstudiantes:number[]):Observable<Estudiante[]>{    
+  buscarByIdsEstudiantes(listaIdsEstudiantes:number[]):Observable<Estudiante[]>{
     try {
       return this.http.post<Estudiante[]>(this.urlEndPoint+"/buscar",listaIdsEstudiantes)
     } catch (error) {
       return throwError("Error al consultar estudiantes por lista de identificadores " + error)
     }
   }
+
+
 
 }

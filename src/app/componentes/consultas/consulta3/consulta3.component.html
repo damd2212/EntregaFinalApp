@@ -1,1 +1,54 @@
-<p>consulta3 works!</p>
+<div>
+  <div class="card bg-light  text-black" style="width: 60%; margin: 0 auto; text-align: center;">
+    <div class="card-header"><h4>{{ titulo }}</h4></div>
+    <div class="card-body">
+      <form #estudianteForm="ngForm">
+
+        <div class="form-group row">
+          <label for="nombre" class="col-form-label col-sm-3">Nombre de la asignatura<samp class="reque">*</samp></label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" [(ngModel)]="nombreBusqueda" name="nombre" required #nombre="ngModel" placeholder="Ingrese el nombre de una asignatura" (keyup)="buscarPorNombre()"/>
+            <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div *ngIf="nombre.errors!['required']">
+                Debe ingresar un nombre para la busqueda
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- <div class="form-group row">
+          <div class="col-sm-2">
+            <button class="btn btn-primary" style="background-color: #3155c2;" role="button" (click)='buscarPorNombre()' [disabled]="!estudianteForm.form.valid">Buscar</button>
+          </div>
+        </div> -->
+
+      </form>
+
+      <hr>
+
+      <div *ngIf="asignaturas?.length==0" class="alert alert-info" >
+        No hay resultados para la consulta
+    </div>
+
+    <table class="table table-bordered table-striped" *ngIf="asignaturas.length>0">
+      <thead>
+          <tr>
+              <th style="width: 70;">ID Asignatura</th>
+              <th>Nombre Asignatura</th>
+          </tr>
+
+      </thead>
+      <tbody>
+          <tr *ngFor="let asignaturaa of asignaturas">
+              <td>{{asignaturaa.idAsignatura}}</td>
+              <td>{{asignaturaa.nombre}}</td>
+          </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+
+
