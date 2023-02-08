@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Curso } from '../modelos/curso';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,20 @@ export class CursosService {
     } catch (error) {
       return throwError("Erro al consultar el curso " + idCurso + " " +  error)
     }
+  }
+
+  createCurso(curso:Curso, idAsignatura: string) : Observable<Curso> {
+    return this.http.post<Curso>(this.urlEndPoint + "/?asignatura=" + idAsignatura, curso, {headers: this.httpHeaders}).pipe(
+      catchError(
+        e => {
+          if (e.status == 400) {
+            return throwError(e);
+          }
+          console.log(e.error.mensaje);
+          Swal.fire('Error al crear el curso', e.error.mensaje, 'error');
+          return throwError(e);
+        })
+      );
   }
 
 }
