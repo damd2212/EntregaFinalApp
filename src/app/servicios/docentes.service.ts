@@ -1,9 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { Docente } from '../modelos/docente';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocentesService {
 
-  constructor() { }
+  private urlEndPoint: string = 'http://localhost:9090/api/docentes';
+
+  constructor(private http: HttpClient) { }
+
+  getDocentes():Observable<Docente[]>{
+    try {
+      return this.http.get<Docente[]>(this.urlEndPoint)
+    } catch (error) {
+      return throwError("Error al consultar los docentes " + error)
+    }
+  }
 }

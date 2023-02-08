@@ -1,1 +1,47 @@
-<p>listar-docentes works!</p>
+<div class="card">
+    <div class="card-header">
+      <h4>Docentes</h4>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Listado de docentes</h5>
+      <div class="my-2 text-left">
+        <button class="btn btn-rounded btn-success" type="button" [routerLink]="['yorch']">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+            <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+          </svg>
+          Crear Docente
+        </button>
+      </div>
+      <div *ngIf="docentes?.length == 0" class="alert alert-info ">
+        No hay registros en la base de datos
+      </div>
+      <div class="table-responsive" *ngIf="docentes.length > 0">
+        <table class="table table-hover table-light">
+          <thead>
+            <tr>
+              <th scope="col">Número de identificación</th>
+              <th scope="col">Tipo de identificación</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Apellidos</th>
+              <th scope="col">Universidad</th>
+              <th scope="col">Tipo de docente</th>
+              <th scope="col">Salario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let docente of docentes">
+              <td>{{ docente.noIdentificacion }}</td>
+              <td>{{ docente.tipoIdentificacion }}</td>
+              <td>{{ docente.nombres }}</td>
+              <td>{{ docente.apellidos}}</td>
+              <td>{{ docente.universidad }}</td>
+              <td>{{ docente.tipoDocente }}</td>
+              <td>{{ docente.salario}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
