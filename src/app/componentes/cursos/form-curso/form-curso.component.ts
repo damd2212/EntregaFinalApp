@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Curso } from 'src/app/modelos/curso';
 import { CursosService } from 'src/app/servicios/cursos.service';
 import Swal from 'sweetalert2';
-import { AsignaturaService } from 'src/app/servicios/asignaturas.service';
+import { AsignaturasService } from 'src/app/servicios/asignaturas.service';
 import { Observable } from 'rxjs';
 import { Asignatura } from 'src/app/modelos/asignatura';
 
@@ -21,7 +21,7 @@ export class FormCursoComponent implements OnInit {
   public asignaturas: Asignatura[] = [];
   public codigo = '';
 
-  constructor(private cursosService: CursosService, private asignaturaService: AsignaturaService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private cursosService: CursosService, private asignaturasService: AsignaturasService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAsignaturas();
@@ -46,7 +46,7 @@ export class FormCursoComponent implements OnInit {
   
   public getAsignaturas(): void{
 
-    this.asignaturaService.getAsignaturas().subscribe(
+    this.asignaturasService.getAsignaturas().subscribe(
       res => {
         this.asignaturas = res;
       },

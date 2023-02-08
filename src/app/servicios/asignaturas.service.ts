@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 
-export class AsignaturaService {
+export class AsignaturasService {
 
   private urlEndPoint: string = 'http://localhost:9090/api/asignaturas';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -21,9 +21,10 @@ export class AsignaturaService {
     }
 
   getAsignaturas():Observable<Asignatura[]>{
-    try {
-      return this.http.get<Asignatura[]>(this.urlEndPoint)
-    } catch (error) {
-      return throwError("Error al consultar las asignaturas " + error)
+        try {
+            return this.http.get<Asignatura[]>(this.urlEndPoint)
+        } catch (error) {
+          return throwError("Error al consultar las asignaturas " + error)
+        }
     }
 }

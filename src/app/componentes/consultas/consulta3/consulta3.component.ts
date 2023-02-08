@@ -13,7 +13,7 @@ export class Consulta3Component implements OnInit {
   titulo:string='Buscar asignatura por nombre'
   asignaturas:Asignatura[] = [];
 
-  constructor(private asignaturaService:AsignaturasService) { }
+  constructor(private asignaturasService:AsignaturasService) { }
 
   ngOnInit(): void {
 
@@ -28,7 +28,7 @@ export class Consulta3Component implements OnInit {
       this.asignaturas = []
 
     }else{
-      this.asignaturaService.getAsignaturasByName(this.nombreBusqueda).subscribe(res =>{
+      this.asignaturasService.getAsignaturasByName(this.nombreBusqueda).subscribe(res =>{
         console.log(res);
 
         if (res != null) {
