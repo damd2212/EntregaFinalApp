@@ -16,8 +16,8 @@ import { Consulta6Component } from './componentes/consultas/consulta6/consulta6.
 const routes: Routes = [
   {path:'',redirectTo:'/estudiantes',pathMatch:'full'},
   {path:'estudiantes',component:ListarEstudiantesComponent},
-  {path:'estudiante/form',component:FormEstudianteComponent},
-  {path:'estudiante/form/:id',component:FormEstudianteComponent},
+  {path:'estudiantes/form',component:FormEstudianteComponent},
+  {path:'estudiantes/form/:id',component:FormEstudianteComponent},
   {path:'docentes',component:ListarDocentesComponent},
   {path:'docentes/form',component:FormDocenteComponent},
   {path:'cursos',component:ListarCursosComponent},

@@ -1,1 +1,118 @@
-<p>form-estudiante works!</p>
+<ul class="alert alert-danger" *ngIf="errores.length > 0">
+  <li *ngFor="let err of errores">
+  {{ err }}
+  </li>
+  </ul>
+<div class="card bg-dark text-white">
+  <div class="card-header">{{title}}</div>
+  <div class="card-body">
+
+    <form #clienteForm="ngForm">
+      <div class="form-group row">
+        <label for="codigo" class="col-form-label col-sm-2">Identificación</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="student.noIdentificacion" name="noIdentificacion" required #noIdentificacion="ngModel">
+          <div class="alert alert-danger" *ngIf="noIdentificacion.invalid && (noIdentificacion.dirty || noIdentificacion.touched)">
+            <div *ngIf="noIdentificacion.errors?.['required']">
+              El codigo es requerido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="tipoIdentificacion" class="col-form-label col-sm-2">Tipo Identificacion</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="student.tipoIdentificacion" name="tipoIdentificacion"
+            required #tpidentificacion="ngModel">
+          <div class="alert alert-danger"
+            *ngIf="tpidentificacion.invalid && (tpidentificacion.dirty || tpidentificacion.touched)">
+            <div *ngIf="tpidentificacion.errors?.['required']">
+              El Tipo de Identificacion es requerido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="nombres" class="col-form-label col-sm-2">Nombres</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="student.nombres" name="nombres" required minlength="5"
+            maxlength="45" #nombre="ngModel">
+          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors?.['required']">
+              El Nombre es requerido
+            </div>
+            <div *ngIf="nombre.errors?.['minlength']">
+              El Nombre debe tener al menos 5 caracteres
+            </div>
+            <div *ngIf="nombre.errors?.['maxlength']">
+              El Nombre debe tener menos de 45 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="apellidos" class="col-form-label col-sm-2">Apellidos</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="student.apellidos" name="apellidos" required
+            minlength="4" maxlength="45" #apellido="ngModel">
+          <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+            <div *ngIf="apellido.errors?.['required']">
+              El Apellido es requerido
+            </div>
+            <div *ngIf="apellido.errors?.['minlength']">
+              El Apellido debe tener al menos 5 caracteres
+            </div>
+            <div *ngIf="apellido.errors?.['maxlength']">
+              El Apellido debe tener menos de 45 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="Identificacion" class="col-form-label col-sm-2">Fecha Ingreso</label>
+        <div class="col-sm-6">
+          <input type="date" class="form-control" [(ngModel)]="student.fechaIngreso" name="fechaIngreso" required
+            #fechaIngreso="ngModel">
+          <div class="alert alert-danger"
+            *ngIf="fechaIngreso.invalid && (fechaIngreso.dirty || fechaIngreso.touched)">
+            <div *ngIf="fechaIngreso.errors?.['required']">
+              La Identificacion es requerida
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="correoInstitucional" class="col-form-label col-sm-2">Correo Electronico</label>
+        <div class="col-sm-6">
+          <input type="email" class="form-control" [(ngModel)]="student.correoElectronico" name="correoElectronico"
+            required #correo="ngModel" pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$">
+          <div class="alert alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+            <div *ngIf="correo.errors?.['required']">
+              El correo de Identificacion es requerido
+            </div>
+            <div *ngIf="correo.errors?.['email']">
+              El Email debe tener un formato válido
+            </div>
+            <div *ngIf="correo.errors?.['pattern']">
+              El Email debe tener un formato válido
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button [disabled]="!clienteForm.form.valid" class="btn btn-primary" role="button" (click)='crearEstudiante()' *ngIf="creacion else elseBlock">Crear</button>
+          <ng-template #elseBlock>
+            <button [disabled]="!clienteForm.form.valid" class="btn btn-primary" role="button" (click)='updateEstudiante()' >Editar</button>
+            </ng-template>
+        </div>
+        <br>
+      </div>
+    </form>
+  </div>
+</div>
+
