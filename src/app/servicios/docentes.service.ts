@@ -19,4 +19,7 @@ export class DocentesService {
       return throwError("Error al consultar los docentes " + error)
     }
   }
+  getDocentePorTipoNumeroId(numeroId:string,tipoId:string):Observable<Docente>{
+    return this.http.get<Docente>(this.urlEndPoint+'/exist?noIdentificacion='+numeroId + '&tipoIdentificacion='+tipoId)
+  }
 }
