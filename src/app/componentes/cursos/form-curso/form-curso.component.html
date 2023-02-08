@@ -4,102 +4,52 @@
         {{err}}
     </li>
   </ul>
-
+  
 <div class="card bg-dark text-white">
     <div class="card-header">{{ titulo }}</div>
     <div class="card-body">
     <form #estudianteForm="ngForm">
-      <div class="form-group row">
-        <label for="codigo" class="col-form-label col-sm-2">Código</label>
+    <div class="form-group row">
+        <label for="codigo" class="col-form-label col-sm-2">Curso Id</label>
         <div class="col-sm-6">
-            <input type="number" class="form-control" [(ngModel)]="estudiante.codigo" name="codigo" #codigo="ngModel" required>
-            <div class="alert alert-danger" *ngIf="codigo.invalid && (codigo.dirty || codigo.touched)">
-                <div *ngIf="codigo.errors?.['required']">
-                   El código es requerido
+            <input type="number" class="form-control" [(ngModel)]="curso.idCurso" name="idCurso" #idCurso="ngModel" required>
+            <div class="alert alert-danger" *ngIf="idCurso.invalid && (idCurso.dirty || idCurso.touched)">
+                <div *ngIf="idCurso.errors?.['required']">
+                   El id del curso es requerido
                 </div>
               </div>
         </div>
     </div>
+    
     <div class="form-group row">
-      <label for="tipoIdentificacion" class="col-form-label col-sm-2">Tipo de identificación</label>
+      <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" [(ngModel)]="estudiante.tipoIdentificacion" name="tipoIdentificacion" #tipoIdentificacion="ngModel" required>
-      <div class="alert alert-danger" *ngIf="tipoIdentificacion.invalid && (tipoIdentificacion.dirty || tipoIdentificacion.touched)">
-        <div *ngIf="tipoIdentificacion.errors?.['required']">
-          Tipo de identificación requerido
-        </div>
-        <div *ngIf="tipoIdentificacion.errors?.['email']">
-          Tipo de identificación requerido
-        </div>
-      </div>
-  </div>
-  </div>
-
-        <div class="form-group row">
-            <label for="nombres" class="col-form-label col-sm-2">Nombres</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" [(ngModel)]="estudiante.nombres" name="nombres" #nombres="ngModel" required minlength="5" maxlength="45">
-                <!--required minlength="5" maxlength="45"-->
-                <div class="alert alert-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
-                    <div *ngIf="nombres.errors?.['required']">
-                      Los nombres son requeridos
-                    </div> 
-                    <div *ngIf="nombres.errors?.['minlength']">
-                      Los nombres deben tener al menos 5 caracteres
-                    </div>
-                  </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="apellidos" class="col-form-label col-sm-2">Apellidos</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" [(ngModel)]="estudiante.apellidos" name="apellidos" #apellidos="ngModel" required minlength="5" maxlength="45">
-            <!--required minlength="5" maxlength="45"-->
-            <div class="alert alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
-              <div *ngIf="apellidos.errors?.['required']">
-                Los apellidos son requeridos
-              </div>
-              <div *ngIf="apellidos.errors?.['minlength']">
-                Los apellidos deben tener al menos 5 caracteres
-              </div>
-            </div>
+        <input type="text" class="form-control" [(ngModel)]="curso.nombre" name="curso" #nombre="ngModel" required minlength="5" maxlength="45">
+        <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+          <div *ngIf="nombre.errors?.['required']">
+            Nombre requerido
+          </div>
+          <div *ngIf="nombre.errors?.['minlength']">
+            El nombre debe tener al menos 5 caracteres
           </div>
         </div>
-        
-        <div class="form-group row">
-          <label for="correoInstitucional" class="col-form-label col-sm-2">Correo institucional</label>
-          <div class="col-sm-6">
-            <input type="email" class="form-control" [(ngModel)]="estudiante.correoInstitucional" name="correoInstitucional" #correoInstitucional="ngModel" required email>
-            <!--required email-->
-          <div class="alert alert-danger" *ngIf="correoInstitucional.invalid && (correoInstitucional.dirty || correoInstitucional.touched)">
-            <div *ngIf="correoInstitucional.errors?.['required']">
-              Correo Institucional requerido
-            </div>
-            <div *ngIf="correoInstitucional.errors?.['email']">
-              Formato de correo incorrecto
-            </div>
-          </div>
       </div>
     </div>
+  objAsignatura?:Asignatura
     <div class="form-group row">
-      <label for="telefono" class="col-form-label col-sm-2">Teléfono</label>
-    <div class="col-sm-6">
-      <input type="telefono" class="form-control" [(ngModel)]="estudiante.telefono" name="telefono" #telefono="ngModel" required>
-      <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
-        <div *ngIf="telefono.errors?.['required']">
-          Telefono requerido
-        </div>
+      <label for="periodo" class="col-form-label col-sm-2">Periodo</label>
+      <div class="col-sm-6">
+          <input type="number" class="form-control" [(ngModel)]="curso.periodo" name="periodo" #periodo="ngModel" required>
+          <div class="alert alert-danger" *ngIf="periodo.invalid && (periodo.dirty || periodo.touched)">
+              <div *ngIf="periodo.errors?.['required']">
+                 El periodo es requerido
+              </div>
+          </div>
       </div>
     </div>
-  </div>
     <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='crearEstudiante()' *ngIf="!estudiante.id else elseBlock"
-            [disabled]="!estudianteForm.form.valid">Crear</button>
-          <ng-template #elseBlock>
-            <button class="btn btn-primary" role="button" (click)='update()'
-              [disabled]="!estudianteForm.form.valid">Editar</button>
-            </ng-template>
+          <button class="btn btn-primary" role="button" (click)='crearCurso()'>Crear</button>
         </div>
       </div>
     </form>
