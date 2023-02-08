@@ -28,6 +28,8 @@ export class ListarEstudiantesComponent implements OnInit {
       }else{
         this.estudiantes = []
       }
+    },err=>{
+      Swal.fire('Error de carga de estudiantes','Error al cargar los estudiantes de la base de datos','error');
     })
   }
 
@@ -58,10 +60,19 @@ export class ListarEstudiantesComponent implements OnInit {
 
   }
 
-  cargarEstudainte(estudiante:Estudiante){
-    this.objEstudiante = estudiante;
-    this.objDireccion = this.objEstudiante.objDireccion
-    this.objTelefonos = this.objEstudiante.listaTelefonos
+  cargarEstudainte(idestudiante:number){
+
+    console.log(idestudiante);
+
+    this.estudianteService.getEstudianteById(idestudiante).subscribe(res =>{
+      console.log(res);
+      this.objEstudiante = res
+      console.log(this.objEstudiante.objDireccion);
+      this.objDireccion = this.objEstudiante.objDireccion
+      this.objTelefonos = this.objEstudiante.listaTelefonos
+    },err=>{
+      Swal.fire('Error de busqueda','Error al buscar un estudiante en especifico','error');
+    })
   }
 
 }
