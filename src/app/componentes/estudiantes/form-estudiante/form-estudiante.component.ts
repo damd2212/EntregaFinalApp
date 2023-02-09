@@ -24,9 +24,9 @@ export class FormEstudianteComponent implements OnInit {
   public errores: string[] = [];
   creacion:Boolean=true
   student:Estudiante;
-  telefono:Telefono
+  telefono:Telefono | undefined
   constructor(private estudianteService: EstudiantesService, private router:Router,private rutaActiva: ActivatedRoute) {
-    this.telefono=new Telefono()
+
     this.student=new Estudiante()
     this.student.objDireccion=new Direccion()
     this.student.listaTelefonos=[]
@@ -42,7 +42,6 @@ export class FormEstudianteComponent implements OnInit {
       this.fecha=this.fecha+this.dia
     }
 
-    console.log(this.fecha);
    }
 
   ngOnInit(): void {
@@ -53,11 +52,14 @@ export class FormEstudianteComponent implements OnInit {
       let id = params['id']
       if(id){
         this.estudianteService.getStudent(id).subscribe( (studentObj) => this.student = studentObj)
-
+        this.telefono=undefined
         this.creacion=false
+      }else{
+        this.telefono=new Telefono()
       }
     })
   }
+
   crearEstudiante(){
     this.estudianteService.create(this.student).subscribe(
       respose =>
@@ -74,8 +76,6 @@ export class FormEstudianteComponent implements OnInit {
     )
   }
   updateEstudiante(){
-    console.log(this.student)
-
     this.estudianteService.update(this.student)
     .subscribe(
       respose  => {
@@ -91,8 +91,16 @@ export class FormEstudianteComponent implements OnInit {
     )
   }
   crearTelefono(){
-    this.student.listaTelefonos.push(this.telefono)
+    this.student.listaTelefonos.push(this.telefono!)
     this.telefono=new Telefono()
+  }
+  editarTelefono(){
+    this.student.listaTelefonos.push(this.telefono!)
+    this.telefono=undefined
+  }
+  cargarTelefono(tel: Telefono | undefined){
+    this.telefono=tel
+    this.student.listaTelefonos=this.student.listaTelefonos.filter(cell=>cell.idTelefono!=this.telefono?.idTelefono)
   }
   eliminarTelefono(tel:Telefono)
   {
