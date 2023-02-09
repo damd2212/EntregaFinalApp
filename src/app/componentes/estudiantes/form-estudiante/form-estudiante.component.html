@@ -30,8 +30,8 @@
           <select class="form-control" [(ngModel)]="student.tipoIdentificacion" name="tipoIdentificacion" required
             #tpidentificacion="ngModel">
             <option value="" selected>Seleccione el tipo de identificación</option>
-            <option value="Cédula de extranjeria">Cédula de extranjeria</option>
-            <option value="Cédula de ciudadania">Cédula de ciudadania</option>
+            <option value="Cedula de extranjeria">Cédula de extranjeria</option>
+            <option value="Cedula de ciudadania">Cédula de ciudadania</option>
           </select>
           <div class="alert alert-danger"
             *ngIf="tpidentificacion.invalid && (tpidentificacion.dirty || tpidentificacion.touched)">

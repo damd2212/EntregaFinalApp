@@ -1,5 +1,5 @@
-<div class="container d-flex justify-content-center">
-  <div class="card bg-light text-dark w-100 my-3">
+
+  <div class="card bg-light text-dark my-3" style="width: 85%;margin: 0 auto;">
     <div class="card-header" style="text-align: center;">
       <h4>Consulta 2</h4>
     </div>
@@ -10,7 +10,7 @@
       </h5>
       <div>
         <div class="row">
-          <div class="col-5">
+          <div class="col-3">
             <small id="emailHelp" class="form-text text-muted">Recuerde que puede agregar los identificadores que
               desee</small>
             <form style="margin-bottom: 25px" #idForm="ngForm">
@@ -68,11 +68,11 @@
               </button>
             </form>
           </div>
-          <div class="col-7">
+          <div class="col-9">
             <div *ngIf="estudiantesEncontrados != null">
               <h5>Resultados</h5>
-              <div *ngIf="estudiantesEncontrados?.length == 0" class="alert alert-info">
-                No se encontraron resultados con los datos de busqueda ingresados
+              <div *ngIf="mensaje != null" class="alert alert-info ">
+                {{mensaje}}
               </div>
               <table class="table table-striped table-bordered" *ngIf="estudiantesEncontrados.length > 0">
                 <thead>
@@ -122,4 +122,3 @@
       </div>
     </div>
   </div>
-</div>

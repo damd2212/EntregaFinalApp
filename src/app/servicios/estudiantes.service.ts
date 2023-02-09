@@ -73,19 +73,11 @@ export class EstudiantesService {
   }
 
   buscarPorNombresApellidosEmail(nombres:String,apellidos:String,correo:String):Observable<Estudiante[]>{
-    try {
       return this.http.get<Estudiante[]>(this.urlEndPoint+"/nombres_apellidos_email?nombres="+nombres+"&apellidos="+apellidos+"&correoElectronico="+correo)
-    } catch (error) {
-      return throwError("Error al consultar estudiantes por nombres, apellidos y correo " + error)
-    }
   }
 
   buscarByIdsEstudiantes(listaIdsEstudiantes:number[]):Observable<Estudiante[]>{
-    try {
       return this.http.post<Estudiante[]>(this.urlEndPoint+"/buscar",listaIdsEstudiantes)
-    } catch (error) {
-      return throwError("Error al consultar estudiantes por lista de identificadores " + error)
-    }
   }
 
   buscarEstudianteByEmail(correoElectronico: string): Observable<Estudiante> {

@@ -13,6 +13,7 @@ export class Consulta2Component implements OnInit {
   estudiantesEncontrados!: Estudiante[];
   listaIds: number[];
   idEstudiante  =new FormControl('');
+  mensaje:any;
 
   constructor(private _estudianteService:EstudiantesService) {
     this.listaIds = [];
@@ -29,9 +30,16 @@ export class Consulta2Component implements OnInit {
       }else{
         this.estudiantesEncontrados=[]
       }
-      
+
     },error=>{
-      swal.fire('Error al buscar los estudiantes', error, 'error');
+      this.estudiantesEncontrados=[]
+      Object.entries(error.error).forEach(([key, value]) => {
+
+        if(key === 'mensaje'){
+          this.mensaje = value
+          console.log('Mensaje del back'+this.mensaje);
+        }
+      })
     })
   }
 
@@ -43,14 +51,14 @@ export class Consulta2Component implements OnInit {
       swal.fire('El identificador ' + this.idEstudiante.value + ' ya ha sido ingresado')
       this.idEstudiante.reset()
     }
-    
+
   }
 
   borrar(id:number){
-    let index = this.buscarID(id)    
+    let index = this.buscarID(id)
     if(index!=null){
       this.listaIds.splice(index,1)
-    }      
+    }
   }
 
   buscarID(id:number){
@@ -58,7 +66,7 @@ export class Consulta2Component implements OnInit {
       if(this.listaIds[index]==id){
         return index
       }
-      
+
     }
     return null
   }

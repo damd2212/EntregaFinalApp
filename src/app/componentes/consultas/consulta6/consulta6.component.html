@@ -6,7 +6,7 @@
           <h5 class="card-title">
             {{ titulo }}
           </h5>
-          <div class="form-group row">
+          <!-- <div class="form-group row">
             <label for="tipo" class="col-form-label col-sm-3">Tipo de identificación<samp class="reque">*</samp></label>
             <div class="col-sm-7">
               <input type="text" class="form-control" [(ngModel)]="tipoIdABuscar" name="tipo" required #tipo="ngModel" placeholder="Ingrese el tipo de id"/>
@@ -16,8 +16,26 @@
                 </div>
               </div>
             </div>
+          </div> -->
+
+          <div class="form-group row">
+            <label for="tipoIdentificacion" class="col-form-label col-sm-3">Tipo Identificacion</label>
+            <div class="col-sm-7">
+              <select class="form-control" [(ngModel)]="tipoIdABuscar" name="tipoIdentificacion" required
+                #tpidentificacion="ngModel">
+                <option value="" selected>Seleccione el tipo de identificación</option>
+                <option value="Cedula de extranjeria">Cédula de extranjeria</option>
+                <option value="Cedula de ciudadania">Cédula de ciudadania</option>
+              </select>
+              <div class="alert alert-danger"
+                *ngIf="tpidentificacion.invalid && (tpidentificacion.dirty || tpidentificacion.touched)">
+                <div *ngIf="tpidentificacion.errors?.['required']">
+                  El Tipo de Identificacion es requerido
+                </div>
+              </div>
+            </div>
           </div>
-  
+
           <div class="form-group row">
             <label for="numId" class="col-form-label col-sm-3">Número de identificación<samp class="reque">*</samp></label>
             <div class="col-sm-7">
@@ -29,7 +47,7 @@
               </div>
             </div>
           </div>
-  
+
           <div class="form-group row">
             <div class="col-sm-2">
               <button class="btn btn-primary" style="background-color: #3155c2;" role="button" (click)='buscarDocente()' [disabled]="!DocenteForm.form.valid">
@@ -40,17 +58,12 @@
               </button>
             </div>
           </div>
-  
+
         </form>
-  
+
         <hr>
-  
-        <div *ngIf="objDocente==null" class="alert alert-info" >
-          No hay resultados para la búsqueda
-        </div>
-  
-  
-        <div *ngIf="objDocente!=null">
+
+        <div *ngIf="objDocente!=null" style="text-align: center;">
           <h5 class="titulo">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
               <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z"/>
@@ -71,9 +84,8 @@
           <span class="subtitulo">Tipo de docente: </span>{{objDocente.tipoDocente}}
           <br>
           <span class="subtitulo">Salario: </span>{{objDocente.salario}}
-           <hr>
+
         </div>
       </div>
     </div>
   </div>
-  

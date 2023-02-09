@@ -14,6 +14,7 @@ export class Consulta1Component implements OnInit {
   apellidos:String=""
   correo:String=""
   estudiantesEncontrados!:Estudiante[]
+  mensaje:any;
 
   constructor(private _estudianteService: EstudiantesService) { }
 
@@ -24,13 +25,21 @@ export class Consulta1Component implements OnInit {
     if(this.nombres!="" || this.apellidos!="" || this.correo!=""){
       this._estudianteService.buscarPorNombresApellidosEmail(this.nombres,this.apellidos,this.correo).subscribe(response=>{
         console.log(response);
+        this.mensaje = null
         if(response!=null){
           this.estudiantesEncontrados=response
         }else{
           this.estudiantesEncontrados=[]
         }
       },error=>{
-        swal.fire('Error al buscar los estudiantes', error, 'error');
+        this.estudiantesEncontrados=[]
+        Object.entries(error.error).forEach(([key, value]) => {
+
+          if(key === 'mensaje'){
+            this.mensaje = value
+            console.log('Mensaje del back'+this.mensaje);
+          }
+        })
       })
     }else{
       swal.fire('Datos inválidos', 'Al menos debe ingresar el valor de uno de los campos', 'info');

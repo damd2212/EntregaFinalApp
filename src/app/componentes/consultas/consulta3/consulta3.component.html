@@ -30,8 +30,8 @@
 
       <hr>
 
-      <div *ngIf="asignaturas?.length==0" class="alert alert-info" >
-        No hay resultados para la consulta
+    <div *ngIf="mensaje != null" class="alert alert-info" >
+        {{mensaje}}
     </div>
 
     <table class="table table-bordered table-striped" *ngIf="asignaturas.length>0">
