@@ -3,8 +3,8 @@
   {{ err }}
   </li>
   </ul>
-<div class="card bg-dark text-white">
-  <div class="card-header">{{title}}</div>
+<div class="card bg-light  text-black" style="width: 60%; margin: 0 auto; text-align: center;">
+  <div class="card-header"><h4>{{title}}</h4></div>
   <div class="card-body">
 
     <form #clienteForm="ngForm">
@@ -14,7 +14,7 @@
           <input type="text" class="form-control" [(ngModel)]="student.noIdentificacion" name="noIdentificacion" required #noIdentificacion="ngModel">
           <div class="alert alert-danger" *ngIf="noIdentificacion.invalid && (noIdentificacion.dirty || noIdentificacion.touched)">
             <div *ngIf="noIdentificacion.errors?.['required']">
-              El codigo es requerido
+              La identificación es requerida
             </div>
           </div>
         </div>
@@ -37,17 +37,17 @@
       <div class="form-group row">
         <label for="nombres" class="col-form-label col-sm-2">Nombres</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="student.nombres" name="nombres" required minlength="5"
-            maxlength="45" #nombre="ngModel">
+          <input type="text" class="form-control" [(ngModel)]="student.nombres" name="nombres" required minlength="3"
+            maxlength="50" #nombre="ngModel">
           <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
             <div *ngIf="nombre.errors?.['required']">
               El Nombre es requerido
             </div>
             <div *ngIf="nombre.errors?.['minlength']">
-              El Nombre debe tener al menos 5 caracteres
+              El Nombre debe tener al menos 3 caracteres
             </div>
             <div *ngIf="nombre.errors?.['maxlength']">
-              El Nombre debe tener menos de 45 caracteres
+              El Nombre debe tener menos de 50 caracteres
             </div>
           </div>
         </div>
@@ -57,16 +57,16 @@
         <label for="apellidos" class="col-form-label col-sm-2">Apellidos</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="student.apellidos" name="apellidos" required
-            minlength="4" maxlength="45" #apellido="ngModel">
+            minlength="3" maxlength="50" #apellido="ngModel">
           <div class="alert alert-danger" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
             <div *ngIf="apellido.errors?.['required']">
               El Apellido es requerido
             </div>
             <div *ngIf="apellido.errors?.['minlength']">
-              El Apellido debe tener al menos 5 caracteres
+              El Apellido debe tener al menos 3 caracteres
             </div>
             <div *ngIf="apellido.errors?.['maxlength']">
-              El Apellido debe tener menos de 45 caracteres
+              El Apellido debe tener menos de 50 caracteres
             </div>
           </div>
         </div>
@@ -75,11 +75,14 @@
         <label for="Identificacion" class="col-form-label col-sm-2">Fecha Ingreso</label>
         <div class="col-sm-6">
           <input type="date" class="form-control" [(ngModel)]="student.fechaIngreso" name="fechaIngreso" required
-            #fechaIngreso="ngModel">
+            #fechaIngreso="ngModel" max="{{fecha}}">
           <div class="alert alert-danger"
             *ngIf="fechaIngreso.invalid && (fechaIngreso.dirty || fechaIngreso.touched)">
             <div *ngIf="fechaIngreso.errors?.['required']">
               La Identificacion es requerida
+            </div>
+            <div *ngIf="fechaIngreso.errors?.['max']">
+              La Fecha debe ser pasada o presente
             </div>
           </div>
         </div>
@@ -102,17 +105,141 @@
           </div>
         </div>
       </div>
+      <div class="card-header"><h4>Dirección</h4></div>
+      <div class="form-group row">
+        <label for="direccionResidencia" class="col-form-label col-sm-2">Dirección de Residencia</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="student.objDireccion.direccionResidencia" name="direccionResidencia" required
+            minlength="5" maxlength="25" #direccionResidencia="ngModel">
+          <div class="alert alert-danger" *ngIf="direccionResidencia.invalid && (direccionResidencia.dirty || direccionResidencia.touched)">
+            <div *ngIf="direccionResidencia.errors?.['required']">
+              La Dirección es requerida
+            </div>
+            <div *ngIf="direccionResidencia.errors?.['minlength']">
+              La Dirección debe tener al menos 5 caracteres
+            </div>
+            <div *ngIf="direccionResidencia.errors?.['maxlength']">
+              La dirección debe tener menos de 25 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ciudad" class="col-form-label col-sm-2">Ciudad </label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="student.objDireccion.ciudad" name="ciudad" required
+            minlength="4" maxlength="50" #ciudad="ngModel">
+          <div class="alert alert-danger" *ngIf="ciudad.invalid && (ciudad.dirty || ciudad.touched)">
+            <div *ngIf="ciudad.errors?.['required']">
+              La ciudad es requerida
+            </div>
+            <div *ngIf="ciudad.errors?.['minlength']">
+              La ciudad debe tener al menos 4 caracteres
+            </div>
+            <div *ngIf="ciudad.errors?.['maxlength']">
+              La ciudad debe tener menos de 50 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="pais" class="col-form-label col-sm-2">Pais</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="student.objDireccion.pais" name="pais" required
+            minlength="4" maxlength="50" #pais="ngModel">
+          <div class="alert alert-danger" *ngIf="pais.invalid && (pais.dirty || pais.touched)">
+            <div *ngIf="pais.errors?.['required']">
+              El pais es requerido
+            </div>
+            <div *ngIf="pais.errors?.['minlength']">
+              El pais debe tener al menos 4 caracteres
+            </div>
+            <div *ngIf="pais.errors?.['maxlength']">
+              El pais debe tener menos de 50 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+    <div class="card-header"><h4>Telefonos</h4></div>
+    <form #telefonosForm="ngForm">
+      <div class="form-group row">
+        <label for="tipo" class="col-form-label col-sm-2">Tipo</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="telefono.tipo" name="tipo" required #tipo="ngModel">
+          <div class="alert alert-danger" *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" id="divtipo">
+            <div *ngIf="tipo.errors?.['required']">
+              El Tipo es requerido
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="form-group row">
+        <label for="numero" class="col-form-label col-sm-2">Número</label>
         <div class="col-sm-6">
-          <button [disabled]="!clienteForm.form.valid" class="btn btn-primary" role="button" (click)='crearEstudiante()' *ngIf="creacion else elseBlock">Crear</button>
-          <ng-template #elseBlock>
-            <button [disabled]="!clienteForm.form.valid" class="btn btn-primary" role="button" (click)='updateEstudiante()' >Editar</button>
-            </ng-template>
+          <input type="text" class="form-control" [(ngModel)]="telefono.numero" name="numero"
+            required #numero="ngModel" pattern="^8.*$" minlength="5" maxlength="20">
+          <div class="alert alert-danger"
+            *ngIf="numero.invalid && (numero.dirty || numero.touched)" id="divnumero">
+            <div *ngIf="numero.errors?.['required']">
+              El número es requerido
+            </div>
+            <div *ngIf="numero.errors?.['pattern']">
+              El número debe comenzar con 8
+            </div>
+            <div *ngIf="numero.errors?.['minlength']">
+              El número debe tener al menos 5 caracteres
+            </div>
+            <div *ngIf="numero.errors?.['maxlength']">
+              El número debe tener menos de 20 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button [disabled]="!telefonosForm.form.valid" class="btn btn-primary" role="button" (click)='crearTelefono()'>Agregar Telefono</button>
         </div>
         <br>
       </div>
     </form>
+    <table class="table table-bordered table-striped" *ngIf="this.student.listaTelefonos.length>0">
+      <thead>
+          <tr>
+              <th style="width: 70;">Tipo</th>
+              <th>Número</th>
+              <th>Eliminar</th>
+          </tr>
+
+      </thead>
+      <tbody>
+          <tr *ngFor="let tel of student.listaTelefonos">
+              <td>{{tel.tipo}}</td>
+              <td>{{tel.numero}}</td>
+              <td><button style="margin-left: 10px;" type="button" (click)="eliminarTelefono(tel)" class="btn btn-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                </svg>
+                Eliminar
+              </button></td>
+          </tr>
+      </tbody>
+    </table>
+    <div *ngIf="this.student.listaTelefonos.length==0" class="alert alert-info" >
+      Debe registrar almenos 2 telefonos
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button [disabled]="!clienteForm.form.valid || this.student.listaTelefonos.length==0" class="btn btn-primary" role="button" (click)='crearEstudiante()' *ngIf="creacion else elseBlock">Crear</button>
+        <ng-template #elseBlock>
+          <button [disabled]="!clienteForm.form.valid || this.student.listaTelefonos.length==0" class="btn btn-primary" role="button" (click)='updateEstudiante()' >Editar</button>
+          </ng-template>
+      </div>
+      <br>
+    </div>
   </div>
 </div>
+<br><br>
 
