@@ -1,74 +1,80 @@
 <ul class="alert alert-danger" *ngIf="errores.length>0">
-  
-    <li *ngFor="let err of errores">
-        {{err}}
-    </li>
-  </ul>
-  
-<div class="card bg-dark text-white">
+
+  <li *ngFor="let err of errores">
+    {{err}}
+  </li>
+</ul>
+<div class="container d-flex justify-content-center">
+  <div class="card bg-light text-dark w-75 my-3">
     <div class="card-header">{{ titulo }}</div>
     <div class="card-body">
-    <form #cursoForm="ngForm">
-    <div class="form-group row">
-        <label for="codigo" class="col-form-label col-sm-2">Curso Id</label>
-        <div class="col-sm-6">
-            <input type="number" class="form-control" [(ngModel)]="curso.idCurso" name="idCurso" #idCurso="ngModel" required>
+      <form #cursoForm="ngForm">
+        <div class="form-group ">
+          <label for="codigo" class="col-form-label col-sm-2">Curso Id</label>
+          <div class="col-sm-12">
+            <input type="number" class="form-control" [(ngModel)]="curso.idCurso" name="idCurso" #idCurso="ngModel"
+              required>
             <!--required-->
             <div class="alert alert-danger" *ngIf="idCurso.invalid && (idCurso.dirty || idCurso.touched)">
-                <div *ngIf="idCurso.errors?.['required']">
-                   El id del curso es requerido
-                </div>
+              <div *ngIf="idCurso.errors?.['required']">
+                El id del curso es requerido
               </div>
-        </div>
-    </div>
-    <div class="form-group row">
-      <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
-      <div class="col-sm-6">
-        <input type="text" class="form-control" [(ngModel)]="curso.nombre" name="curso" #nombre="ngModel" required minlength="5" maxlength="45">
-        <!--required minlength="5" maxlength="45"-->
-        <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
-          <div *ngIf="nombre.errors?.['required']">
-            Nombre requerido
-          </div>
-          <div *ngIf="nombre.errors?.['minlength']">
-            El nombre debe tener al menos 5 caracteres
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="periodo" class="col-form-label col-sm-2">Periodo</label>
-      <div class="col-sm-6">
-          <input type="number" class="form-control" [(ngModel)]="curso.periodo" name="periodo" #periodo="ngModel" required>
-          <!--required-->
-          <div class="alert alert-danger" *ngIf="periodo.invalid && (periodo.dirty || periodo.touched)">
+        <div class="form-group ">
+          <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" [(ngModel)]="curso.nombre" name="curso" #nombre="ngModel" required
+              minlength="5" maxlength="45">
+            <!--required minlength="5" maxlength="45"-->
+            <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div *ngIf="nombre.errors?.['required']">
+                Nombre requerido
+              </div>
+              <div *ngIf="nombre.errors?.['minlength']">
+                El nombre debe tener al menos 5 caracteres
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label for="periodo" class="col-form-label col-sm-2">Periodo</label>
+          <div class="col-sm-12">
+            <input type="number" class="form-control" [(ngModel)]="curso.periodo" name="periodo" #periodo="ngModel"
+              required>
+            <!--required-->
+            <div class="alert alert-danger" *ngIf="periodo.invalid && (periodo.dirty || periodo.touched)">
               <div *ngIf="periodo.errors?.['required']">
-                 El periodo es requerido
+                El periodo es requerido
               </div>
+            </div>
           </div>
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="asignatura" class="col-form-label col-sm-2">Asignatura</label>
-      <div class="col-sm-6">
-        <select style="width: 100%;" class="form-select" aria-label="Default select example" [(ngModel)]="codigo" name="codigo" #name="ngModel" required>
-          <!--required-->
-          <option value="">Seleccione la Asignatura</option>
-          <option *ngFor="let asignatura of asignaturas;" [value]="asignatura.idAsignatura">{{asignatura.nombre}}</option>
-        </select>
-        <div class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
-          <div *ngIf="name.errors?.['required']">
-             Se debe seleccionar una asignatura
-          </div>
-      </div>
-      </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='crearCurso()'
-          [disabled]="!cursoForm.form.valid">Crear</button>
         </div>
-      </div>
-    </form>
+        <div class="form-group ">
+          <label for="asignatura" class="col-form-label col-sm-2">Asignatura</label>
+          <div class="col-sm-12">
+            <select style="width: 100%;" class="form-control" aria-label="Default select example" [(ngModel)]="codigo"
+              name="codigo" #name="ngModel" required>
+              <!--required-->
+              <option value="">Seleccione la Asignatura</option>
+              <option *ngFor="let asignatura of asignaturas;" [value]="asignatura.idAsignatura">{{asignatura.nombre}}
+              </option>
+            </select>
+            <div class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+              <div *ngIf="name.errors?.['required']">
+                Se debe seleccionar una asignatura
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group ">
+          <div class="col-sm-12">
+            <button class="btn btn-primary" role="button" (click)='crearCurso()'
+              [disabled]="!cursoForm.form.valid">Crear</button>
+          </div>
+        </div>
+      </form>
     </div>
-    </div>
+  </div>
+</div>
