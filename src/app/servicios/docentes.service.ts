@@ -26,26 +26,6 @@ export class DocentesService {
   }
 
   registrarDocente(objDocente : Docente) : Observable<Docente>{
-    /* try {
-      return this.http.post<Docente>(this.urlEndPoint,objDocente, {headers: this.httpHeaders})
-    } catch (error : any) {
-      if (error.status == 400) {
-        return throwError(error)
-      }
-      console.log(error.err.mensaje)
-      Swal.fire('Error al crear el docente', error.error.mensaje, 'error')
-      return throwError(error)
-    } */
-    return this.http.post<Docente>(this.urlEndPoint,objDocente, {headers: this.httpHeaders}).pipe(
-      catchError(
-        e => {
-          if (e.status == 400) {
-            return throwError(e)
-          }
-          console.log(e.err.mensaje)
-          Swal.fire('Error al crear el docente', e.error.mensaje, 'error')
-          return throwError(e)
-        })
-    )
+    return this.http.post<Docente>(this.urlEndPoint,objDocente, {headers: this.httpHeaders})
   }
 }

@@ -100,7 +100,7 @@
                 <div class="form-group mb-3">
                     <label class="form-label">Salario</label>
                     <input class="form-control" type="number" placeholder="Ingresa el Salario"
-                        [(ngModel)]="docente.salario" name="salario" required min="0" #salario = "ngModel">
+                        [(ngModel)]="docente.salario" name="salario" required min="1" #salario = "ngModel">
                     <div *ngIf="salario.invalid && (salario.dirty || salario.touched)">
                         <small class="text-danger" *ngIf="salario?.errors?.['required']">
                             • El campo "Salario" es requerido

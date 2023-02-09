@@ -88,6 +88,8 @@ export class EstudiantesService {
     }
   }
 
-
+  buscarEstudianteByEmail(correoElectronico: string): Observable<Estudiante> {
+    return this.http.get<Estudiante>(this.urlEndPoint + "/buscarPorEmail?correoElectronico=" + correoElectronico)
+  }
 
 }
