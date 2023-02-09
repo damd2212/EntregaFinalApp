@@ -1,1 +1,127 @@
-<p>form-docente works!</p>
+<div class="container d-flex justify-content-center">
+    <div class="card bg-light text-dark w-75 my-3">
+        <div class="card-header">Registrar Docente</div>
+        <div class="card-body">
+            <form #docenteForm="ngForm">
+                <div class="form-group mb-3">
+                    <label class="form-label">Nombres</label>
+                    <input class="form-control" type="text" placeholder="Ingresa el Nombre"
+                        [(ngModel)]="docente.nombres" name="nombre" required minlength="3" maxlength="50"
+                        #nombre="ngModel">
+                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                        <small class="text-danger" *ngIf="nombre?.errors?.['required']">
+                            • El campo "Nombres" es requerido
+                        </small>
+                        <small class="text-danger" *ngIf="nombre?.errors?.['minlength']">
+                            • El campo "Nombres" debe tener minimo 3 caracteres
+                        </small>
+                        <small class="text-danger" *ngIf="nombre?.errors?.['maxlength']">
+                            • El campo "Nombres" debe tener máximo 50 caracteres
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input class="form-control" type="text" placeholder="Ingresa los Apellidos"
+                        [(ngModel)]="docente.apellidos" name="apellido" required minlength="3" maxlength="50"
+                        #apellido="ngModel">
+                    <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                        <small class="text-danger" *ngIf="apellido?.errors?.['required']">
+                            • El campo "Apellidos" es requerido
+                        </small>
+                        <small class="text-danger" *ngIf="apellido?.errors?.['minlength']">
+                            • El campo "Apellidos" debe tener minimo 3 caracteres
+                        </small>
+                        <small class="text-danger" *ngIf="apellido?.errors?.['maxlength']">
+                            • El campo "Apellidos" debe tener máximo 50 caracteres
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Tipo de Identificación</label>
+                    <select class="form-control" [(ngModel)]="docente.tipoIdentificacion" name="tipoIdentificacion"
+                        required #tipoIdentificacion="ngModel">
+                        <option value="" selected>Seleccione la Asignatura</option>
+                        <option value="Cédula de extranjeria">Cédula de extranjeria</option>
+                        <option value="Cédula de ciudadania">Cédula de ciudadania</option>
+                    </select>
+                    <div *ngIf="tipoIdentificacion.invalid && (tipoIdentificacion.dirty || tipoIdentificacion.touched)">
+                        <small class="text-danger" *ngIf="tipoIdentificacion?.errors?.['required']">
+                            • El campo "Tipo de Identificacion" es requerido
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Identificación</label>
+                    <input class="form-control" type="number" placeholder="Ingresa la Identificación"
+                        [(ngModel)]="docente.noIdentificacion" name="noIdentificacion" required
+                        #noIdentificacion="ngModel">
+                    <div *ngIf="noIdentificacion.invalid && (noIdentificacion.dirty || noIdentificacion.touched)">
+                        <small class="text-danger" *ngIf="noIdentificacion?.errors?.['required']">
+                            • El campo "Identificación" es requerido
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Tipo de Docente</label>
+                    <input class="form-control" type="text" placeholder="Ingresa el tipo de docente"
+                        [(ngModel)]="docente.tipoDocente" name="tipoDocente" required minlength="5" maxlength="20"
+                        #tipoDocente="ngModel">
+                    <div *ngIf="tipoDocente.invalid && (tipoDocente.dirty || tipoDocente.touched)">
+                        <small class="text-danger" *ngIf="tipoDocente?.errors?.['required']">
+                            • El campo "Tipo de Docente" es requerido
+                        </small>
+                        <small class="text-danger" *ngIf="tipoDocente?.errors?.['minlength']">
+                            • El campo "Tipo de Docente" debe tener minimo 5 caracteres
+                        </small>
+                        <small class="text-danger" *ngIf="tipoDocente?.errors?.['maxlength']">
+                            • El campo "Tipo de Docente" debe tener máximo 20 caracteres
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Universidad</label>
+                    <input class="form-control" type="text" placeholder="Ingresa la Universidad"
+                        [(ngModel)]="docente.universidad" name="universidad" required minlength="5" maxlength="30"
+                        #universidad="ngModel">
+                    <div *ngIf="universidad.invalid && (universidad.dirty || universidad.touched)">
+                        <small class="text-danger" *ngIf="universidad?.errors?.['required']">
+                            • El campo "Universidad" es requerido
+                        </small>
+                        <small class="text-danger" *ngIf="universidad?.errors?.['minlength']">
+                            • El campo "Universidad" debe tener minimo 5 caracteres
+                        </small>
+                        <small class="text-danger" *ngIf="universidad?.errors?.['maxlength']">
+                            • El campo "Universidad" debe tener máximo 30 caracteres
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Salario</label>
+                    <input class="form-control" type="number" placeholder="Ingresa el Salario"
+                        [(ngModel)]="docente.salario" name="salario" required min="0" #salario = "ngModel">
+                    <div *ngIf="salario.invalid && (salario.dirty || salario.touched)">
+                        <small class="text-danger" *ngIf="salario?.errors?.['required']">
+                            • El campo "Salario" es requerido
+                        </small>
+                        <small class="text-danger" *ngIf="salario?.errors?.['min']">
+                            • El campo "Salario" debe ser positivo
+                        </small>
+                    </div>
+                </div>
+                <ul class="alert alert-danger mt-4" *ngIf="errores.length > 0">
+                    <li *ngFor="let err of errores" class="py-2">
+                        {{ err }}
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="button" class="btn btn-primary" (click)="registrarDocente()"
+                        [disabled]="!docenteForm.form.valid">
+                        Registrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
