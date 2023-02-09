@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Estudiante } from 'src/app/modelos/estudiante';
 import { EstudiantesService } from 'src/app/servicios/estudiantes.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-consulta4',
@@ -26,10 +27,9 @@ export class Consulta4Component implements OnInit {
       res=>{
         this.estudiante = res
       },(err: HttpErrorResponse) => {
-        const map = new Map(Object.entries(err.error));
-        const vector = Array.from(map.values());
-        this.errores = vector as string[];
-        console.error('Código del error desde el backend: ' + err.status);
+        console.error(err);
+        this.estudiante = new Estudiante()
+        Swal.fire('Error al buscar','No se encontró al estudiante con email: '+ this.emailEstudiante,'error')
       }
     )
   }
